@@ -1,0 +1,510 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+:root {
+    --video-bg: rgb(233, 233, 233);
+}
+
+.video-container>* {
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.video-container {
+    margin: 1em auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--video-bg);
+}
+
+.video-container video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.video-container .controls-top {
+    position: absolute;
+    top: 0;
+    height: 3.5em;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0));
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.video-container .controls-top > div {
+    margin: 0 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transform: translateY(-5px);
+    background-color: rgba(37, 37, 37, 0.473);
+    padding: 0.25em 0.5em;
+}
+.video-container .controls-top > div span {
+    color: white;
+}
+.video-container .controls-top > div svg {
+    margin-right: 0.5em;
+}
+
+.video-container .controls-bottom {
+    width: 100%;
+    height: 5em;
+    background: linear-gradient(rgb(0, 0, 0, 0) 10%, rgb(0, 0, 0, 0.3), rgb(0, 0, 0, 0.5));
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    padding: 1.5em 1em 0 1em;
+}
+
+.hidden {
+    display: none;
+}
+
+#slider {
+    margin: 0 0.25em;
+}
+
+.noUi-handle {
+    background-color: red;
+    box-shadow: none;
+    border: none;
+    border-radius: 50%;
+}
+
+.noUi-handle:after,
+.noUi-handle:before {
+    display: none;
+}
+
+.noUi-tooltip {
+    color: white;
+    background-color: black;
+    border: none;
+    padding: 5px 10px;
+    font-size: 0.75em;
+}
+
+.noUi-horizontal {
+    height: 5px;
+    cursor: pointer;
+}
+
+.noUi-horizontal .noUi-handle {
+    width: 12px;
+    height: 12px;
+    left: -15px;
+    top: 0;
+    transition: width 200ms, height 200ms;
+}
+
+.noUi-horizontal .noUi-origin {
+    right: -2px;
+    top: -3.5px;
+}
+
+
+
+html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
+    right: -3px;
+    left: auto;
+}
+
+.noUi-connects {
+    height: 5px;
+}
+
+.noUi-connect {
+    background-color: red;
+    z-index: -1;
+}
+
+.noUi-base {
+    top: -1px;
+    left: -1px;
+}
+
+.noUi-origin {
+    top: 1px;
+}
+
+
+
+.controls .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5em;
+}
+
+.controls .buttons .left div,
+.controls .buttons .right div {
+    display: inline-block;
+    margin: 0 0.25em;
+}
+
+.controls .buttons svg {
+    width: 19px;
+    height: 19px;
+}
+
+#picture-in-picture svg {
+    width: 24px;
+    height: 24px;
+}
+
+
+.video-container .controls-bottom #time div,
+.video-container .controls-bottom #time span {
+    color: white;
+}
+
+
+.controls-bottom input[type=range] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 8.4px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.controls-bottom input[type=range]:focus {
+    outline: none;
+}
+
+.controls-bottom input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    transition: all 0.4s ease;
+}
+
+.controls-bottom input[type=range]::-webkit-slider-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 16px;
+    background: var(--youtube-red);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-left: -1px;
+}
+
+.controls-bottom input[type=range]:focus::-webkit-slider-runnable-track {
+    background: transparent;
+}
+
+input[type=range].volume {
+    position: relative;
+    height: 5px;
+    background-color: #fff;
+    border-radius: 50px;
+    width: 0;
+    top: -1.5px;
+    transition: width 0.2s ease-in-out;
+    opacity: 0;
+}
+
+input[type=range].volume::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: -100%;
+    background-color: rgba(255, 0, 0, 0);
+}
+
+input[type=range].volume::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: -100%;
+    background-color: rgba(255, 0, 0, 0);
+}
+
+input[type=range].volume::-webkit-slider-runnable-track {
+    background-color: transparent;
+}
+
+input[type=range].volume::-webkit-slider-thumb {
+    margin-left: 0;
+    height: 10px;
+    width: 10px;
+    background: #fff;
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 1.3px;
+}
+
+input[type=range]::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50px;
+    border: 1px solid var(--youtube-red);
+    background: var(--youtube-red);
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+input[type=range]:focus::-moz-range-track {
+    outline: none;
+}
+
+input[type=range].volume::-moz-range-thumb {
+    border: 1px solid #fff;
+    background: #fff;
+}
+
+.volume-con:hover input {
+    width: 65px;
+    opacity: 1;
+}
+
+.video-container .playback-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.336);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+}
+
+.video-container .playback-animation svg {
+    height: 20px;
+    width: 20px;
+}
+
+.controls-bottom .buttons .left>div,
+.controls-bottom .buttons .left .volume-con>div,
+.controls-bottom .buttons .right>div {
+    position: relative;
+}
+
+.controls-bottom .buttons .left>div:not(:last-child)::before,
+.controls-bottom .buttons .left .volume-con>div::before,
+.controls-bottom .buttons .right>div::before {
+    display: none;
+    position: absolute;
+    top: -260%;
+    left: -50%;
+    content: attr(data-title);
+    padding: 0.25em 0.5em;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    word-break: keep-all;
+    white-space: pre;
+}
+
+.controls-bottom .buttons .left>div:hover::before,
+.controls-bottom .buttons .left .volume-con>div:hover::before,
+.controls-bottom .buttons .right>div:hover::before {
+    display: inline-block;
+}
+
+.controls-bottom .buttons .right>div:last-child::before {
+    transform: translateX(-60%);
+}
+
+#time {
+    font-size: 1em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.noUi-connects {
+    position: relative;
+    overflow: unset;
+    z-index: 100;
+}
+
+#slider .noUi-connects .slider-tooltip {
+    display: none;
+    position: absolute;
+    padding: 0.25em 0.5em;
+    background-color: black;
+    color: white;
+    transform: translate(-50%, -200%);
+    border-radius: 5px;
+}
+
+.video-container #speech-bubble {
+    width: 320px;
+    position: absolute;
+    color: black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    border: 5px solid #333;
+    border-radius: 50%;
+    padding: 3em 2.5em;
+    text-align: center;
+}
+
+.video-container #speech-bubble::before, .video-container #speech-bubble::after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    transform: rotateZ(30deg);
+}
+
+.video-container #speech-bubble::before {
+    left: 8px;
+    bottom: -32px;
+    border: 30px solid;
+    border-color: #333 transparent transparent #333;
+}
+
+.video-container #speech-bubble::after {
+    left: 19px;
+    bottom: -19px;
+    border: 25px solid;
+    border-color: var(--video-bg) transparent transparent var(--video-bg);
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .controls .buttons svg {
+        width: 10px;
+        height: 10px;
+    }
+
+    #picture-in-picture svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    .controls #slider {
+        margin-top: 0.25em;
+    }
+
+    .controls .buttons {
+        margin-top: 0;
+    }
+
+    .video-container .controls-bottom {
+        height: 3em;
+        padding-top: 0.5em;
+        padding-right: 0.5em;
+        padding-left: 0.5em;
+    }
+
+    #time {
+        font-size: 0.6em;
+    }
+
+    .controls-bottom .buttons .left>div:hover::before,
+    .controls-bottom .buttons .right>div:hover::before {
+        display: none;
+    }
+
+    #volume {
+        width: 45px;
+        opacity: 1;
+        height: 4px;
+    }
+
+    #slider .noUi-connects .slider-tooltip {
+        font-size: 0.5em;
+    }
+    .video-container #speech-bubble {
+        width: 200px;
+        font-size: 0.6em;
+        border-width: 3px;
+        padding: 2em 1.5em;
+        transform: translate(-50%, -65%);
+    }
+    .video-container #speech-bubble::before {
+        left: 5px;
+        bottom: -14px;
+        border: 15px solid;
+        border-color: #333 transparent transparent #333;
+    }
+    
+    .video-container #speech-bubble::after {
+        left: 10px;
+        bottom: -10px;
+        border: 15px solid;
+        border-color: var(--video-bg) transparent transparent var(--video-bg);
+    }
+    .video-container .controls-top > div span {
+        font-size: 0.75em;
+    }
+    .video-container .controls-top > div svg {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media screen and (min-width: 600px) and (max-width: 992px) {
+    .controls .buttons svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    #picture-in-picture svg {
+        width: 19px;
+        height: 19px;
+    }
+
+    #time {
+        font-size: 0.75em;
+    }
+
+    .controls #slider {
+        margin-top: 0.75em;
+    }
+
+    .controls .buttons {
+        margin-top: 5px;
+    }
+
+    #slider .noUi-connects .slider-tooltip {
+        font-size: 0.75em;
+    }
+    .video-container #speech-bubble {
+        width: 250px;
+        font-size: 0.8em;
+        border-width: 3px;
+        padding: 2em 1.5em;
+        transform: translate(-50%, -65%);
+    }
+    .video-container #speech-bubble::before {
+        left: 5px;
+        bottom: -18px;
+        border: 20px solid;
+        border-color: #333 transparent transparent #333;
+    }
+    
+    .video-container #speech-bubble::after {
+        left: 11px;
+        bottom: -13px;
+        border: 20px solid;
+        border-color: var(--video-bg) transparent transparent var(--video-bg);
+    }
+}
