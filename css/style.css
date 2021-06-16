@@ -361,6 +361,7 @@ input[type=range].volume::-moz-range-thumb {
     border-radius: 50%;
     padding: 3em 2.5em;
     text-align: center;
+    background-color: var(--video-bg);
 }
 
 .video-container #speech-bubble::before, .video-container #speech-bubble::after {
