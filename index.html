@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Video Player</title>
+
+  <link href="css/nouislider.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div class="video-container" id="video-container">
+    <video controls poster='' class="video" id="video" preload="metadata">
+      <source id="video-source">
+    </video>
+    <div class="playback-animation center" id="playback-animation">
+      <svg style="margin-left: 3px;" class="hidden" xmlns="http://www.w3.org/2000/svg" width="11" height="14"
+        viewBox="0 0 11 14">
+        <path id="ic_play_arrow_24px" d="M8,5V19l11-7Z" transform="translate(-8 -5)" fill="#fff" />
+      </svg>
+      <svg class="" xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14">
+        <path id="ic_pause_24px" d="M6,19h4V5H6ZM14,5V19h4V5Z" transform="translate(-6 -5)" fill="#fff" />
+      </svg>
+    </div>
+    <div class="controls-bottom controls hidden">
+      <div id="slider"></div>
+      <div class="buttons">
+        <div class="left">
+          <div id="previous" data-title="Previous (b)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+              <path id="ic_skip_previous_24px" d="M6,6H8V18H6Zm3.5,6L18,18V6Z" transform="translate(-6 -6)"
+                fill="#fff" />
+            </svg>
+          </div>
+          <div id="playpause" data-title="Play (k)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14" viewBox="0 0 11 14">
+              <path id="ic_play_arrow_24px" d="M8,5V19l11-7Z" transform="translate(-8 -5)" fill="#fff" />
+            </svg>
+            <svg class="hidden" xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14">
+              <path id="ic_pause_24px" d="M6,19h4V5H6ZM14,5V19h4V5Z" transform="translate(-6 -5)" fill="#fff" />
+            </svg>
+            <svg class=" replay hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20">
+              <path id="ic_replay_24px" d="M12,5V1L7,6l5,5V7a6,6,0,1,1-6,6H4a8,8,0,1,0,8-8Z"
+                transform="translate(-4 -1)" fill="#fff" />
+            </svg>
+          </div>
+          <div id="next" data-title="Next (n)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+              <path id="ic_skip_next_24px" d="M6,18l8.5-6L6,6ZM16,6V18h2V6Z" transform="translate(-6 -6)" fill="#fff" />
+            </svg>
+          </div>
+          <span class="volume-con">
+            <div id="volume-button" data-title="Mute (m)">
+              <svg class="mute hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                <path id="ic_volume_off_24px"
+                  d="M16.5,12A4.5,4.5,0,0,0,14,7.97v2.21l2.45,2.45A4.232,4.232,0,0,0,16.5,12ZM19,12a6.843,6.843,0,0,1-.54,2.64l1.51,1.51A8.8,8.8,0,0,0,21,12a9,9,0,0,0-7-8.77V5.29A7.005,7.005,0,0,1,19,12ZM4.27,3,3,4.27,7.73,9H3v6H7l5,5V13.27l4.25,4.25A6.924,6.924,0,0,1,14,18.7v2.06a8.99,8.99,0,0,0,3.69-1.81L19.73,21,21,19.73l-9-9ZM12,4,9.91,6.09,12,8.18Z"
+                  transform="translate(-3 -3)" fill="#fff" />
+              </svg>
+              <svg class="low hidden" xmlns="http://www.w3.org/2000/svg" width="13.5" height="16" viewBox="0 0 13.5 16">
+                <path id="ic_volume_down_24px"
+                  d="M18.5,12A4.5,4.5,0,0,0,16,7.97v8.05A4.474,4.474,0,0,0,18.5,12ZM5,9v6H9l5,5V4L9,9Z"
+                  transform="translate(-5 -4)" fill="#fff" />
+              </svg>
+              <svg class="high" xmlns="http://www.w3.org/2000/svg" width="18" height="17.54" viewBox="0 0 18 17.54">
+                <path id="ic_volume_up_24px"
+                  d="M3,9v6H7l5,5V4L7,9Zm13.5,3A4.5,4.5,0,0,0,14,7.97v8.05A4.474,4.474,0,0,0,16.5,12ZM14,3.23V5.29a7,7,0,0,1,0,13.42v2.06A8.994,8.994,0,0,0,14,3.23Z"
+                  transform="translate(-3 -3.23)" fill="#fff" />
+              </svg>
+            </div>
+            <input class="volume" type="range" name="volume-level" min="0" max="1" step="0.01" value="1" id="volume">
+          </span>
+          <div id="time">
+            <div id="time-elapsed">00:00</div>
+            <span> / </span>
+            <div id="video-duration">00:00</div>
+          </div>
+        </div>
+        <div class="right">
+          <div id="picture-in-picture" data-title="PIP (p)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18" viewBox="0 0 22 18">
+              <path id="ic_picture_in_picture_alt_24px"
+                d="M19,11H11v6h8Zm4,8V4.98A1.989,1.989,0,0,0,21,3H3A1.989,1.989,0,0,0,1,4.98V19a2.006,2.006,0,0,0,2,2H21A2.006,2.006,0,0,0,23,19Zm-2,.02H3V4.97H21Z"
+                transform="translate(-1 -3)" fill="#fff" />
+            </svg>
+          </div>
+          <div id="fullscreen" data-title="Fullscreen (f)">
+            <svg class="go" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+              <path id="ic_crop_free_24px"
+                d="M3,5V9H5V5H9V3H5A2.006,2.006,0,0,0,3,5ZM5,15H3v4a2.006,2.006,0,0,0,2,2H9V19H5Zm14,4H15v2h4a2.006,2.006,0,0,0,2-2V15H19ZM19,3H15V5h4V9h2V5A2.006,2.006,0,0,0,19,3Z"
+                transform="translate(-3 -3)" fill="#fff" />
+            </svg>
+            <svg class="exit hidden" xmlns="http://www.w3.org/2000/svg" width="18.403" height="18"
+              viewBox="0 0 18.403 18">
+              <g id="collapse-interface-button-symbol" transform="translate(0 -5.434)">
+                <g id="Group_3" data-name="Group 3" transform="translate(0 5.434)">
+                  <g id="Group_2" data-name="Group 2">
+                    <path id="Path_110" data-name="Path 110" d="M4.217,9.651H0v1.766H5.983V5.434H4.217Z"
+                      transform="translate(0 -5.434)" fill="#fff" />
+                    <path id="Path_111" data-name="Path 111" d="M336.666,9.651V5.434H334.9v5.983h5.983V9.651Z"
+                      transform="translate(-322.48 -5.434)" fill="#fff" />
+                    <path id="Path_112" data-name="Path 112" d="M0,331.231H4.217v4.217H5.983v-5.983H0Z"
+                      transform="translate(0 -317.448)" fill="#fff" />
+                    <path id="Path_113" data-name="Path 113" d="M334.9,335.448h1.766v-4.217h4.217v-1.766H334.9Z"
+                      transform="translate(-322.48 -317.448)" fill="#fff" />
+                  </g>
+                  <rect id="Rectangle_2" data-name="Rectangle 2" width="5.926" height="3.992"
+                    transform="translate(6.239 7.004)" fill="#fff" />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/nouislider.min.js"></script>
+  <script src="js/wNumb.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+
+</html>
